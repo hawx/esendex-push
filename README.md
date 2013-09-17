@@ -1,6 +1,6 @@
 # To use...
 
-Change your [push notification settings](http://esendex.com/developertools) to
+Change your [push notification settings](http://www.esendex.com/developertools) to
 point to the urls:
 
 ```

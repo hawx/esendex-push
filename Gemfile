@@ -1,3 +1,4 @@
 source 'https://rubygems.org'
-gem 'sinatra', '1.1.0'
-gem 'thin'
+gem 'sinatra', '~> 1.4'
+gem 'thin', '~> 1.5'
+gem 'nokogiri'

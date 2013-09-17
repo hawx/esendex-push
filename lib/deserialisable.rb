@@ -1,5 +1,3 @@
-require 'nokogiri'
-
 module Deserialisable
   def root(selector)
     @__root = selector

@@ -15,7 +15,12 @@ module Deserialisable
       value = doc.css(selector).children.to_s
 
       if type.respond_to?(:parse)
-        value = type.parse(value)
+        begin
+          value = type.parse(value)
+        rescue
+          puts "Could not parse '#{value}' as a #{type}."
+          value = nil
+        end
       end
 
       [name, value]

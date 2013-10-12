@@ -10,7 +10,7 @@ $connections = []
 $notifications = []
 
 set :public_folder, Proc.new { File.join(root, 'public') }
-set server: 'thin'
+# set server: 'thin'
 
 helpers do
   def raw
@@ -40,13 +40,13 @@ get '/connect', provides: 'text/event-stream' do
 end
 
 post '/event/received' do
-  notify InboundMessage.from_xml(raw)
+  notify InboundMessage.from_xml(raw); "ok"
 end
 
 post '/event/delivered' do
-  notify MessageDelivered.from_xml(raw)
+  notify MessageDelivered.from_xml(raw); "ok"
 end
 
 post '/event/failed' do
-  notify MessageFailed.from_xml(raw)
+  notify MessageFailed.from_xml(raw); "ok"
 end

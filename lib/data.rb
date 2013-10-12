@@ -13,7 +13,7 @@ class InboundMessage
   def to_json
     {
       type: :received,
-      msg:  "Received message from #{from}",
+      msg:  "Received message from #{from || "Unknown"}",
       at:   Time.now
     }.to_json
   end
@@ -33,7 +33,7 @@ class MessageDelivered
     {
       type: :delivered,
       msg:  "Delivered message",
-      at:   occurred_at
+      at:   occurred_at || Time.now
     }.to_json
   end
 end
@@ -52,7 +52,7 @@ class MessageFailed
     {
       type: :failed,
       msg:  "Failed sending message",
-      at:   occurred_at
+      at:   occurred_at || Time.now
     }.to_json
   end
 end

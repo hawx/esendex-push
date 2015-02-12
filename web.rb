@@ -60,5 +60,7 @@ post '/event/soap' do
          else {type: :other, msg: 'Missing soaps', at: Time.now}
          end
 
+  puts raw
+         
   "ok"
 end

@@ -7,6 +7,8 @@ require_relative 'lib/deserialisable'
 require_relative 'lib/data'
 require_relative 'lib/soap'
 
+$stdout.sync = true
+
 $connections = []
 $notifications = []
 
@@ -53,14 +55,14 @@ post '/event/failed' do
 end
 
 post '/event/soap' do
+    puts raw
+
   notify case raw
          when /<MessageError>/ then SoapMessageError.from_xml(raw)
          when /<MessageEvent>/ then SoapMessageEvent.from_xml(raw)
          when /<MessageReceived>/ then SoapMessageReceived.from_xml(raw)
          else {type: :other, msg: 'Missing soaps', at: Time.now}
          end
-
-  puts raw
          
   "ok"
 end

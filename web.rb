@@ -60,9 +60,9 @@ post '/event/soap' do
   puts body
     
   notify case body
-         when /<MessageError>/ then SoapMessageError.from_xml(body)
-         when /<MessageEvent>/ then SoapMessageEvent.from_xml(body)
-         when /<MessageReceived>/ then SoapMessageReceived.from_xml(body)
+         when /<MessageError/ then SoapMessageError.from_xml(body)
+         when /<MessageEvent/ then SoapMessageEvent.from_xml(body)
+         when /<MessageReceived/ then SoapMessageReceived.from_xml(body)
          else {type: :other, msg: 'Missing soaps', at: Time.now}
          end
          

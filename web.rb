@@ -55,12 +55,14 @@ post '/event/failed' do
 end
 
 post '/event/soap' do
-    puts raw
-
-  notify case raw
-         when /<MessageError>/ then SoapMessageError.from_xml(raw)
-         when /<MessageEvent>/ then SoapMessageEvent.from_xml(raw)
-         when /<MessageReceived>/ then SoapMessageReceived.from_xml(raw)
+  body = /<soap:Body>(.*?)<\/soap:Body>/.match(raw).captures[0]
+    
+  puts body
+    
+  notify case body
+         when /<MessageError>/ then SoapMessageError.from_xml(body)
+         when /<MessageEvent>/ then SoapMessageEvent.from_xml(body)
+         when /<MessageReceived>/ then SoapMessageReceived.from_xml(body)
          else {type: :other, msg: 'Missing soaps', at: Time.now}
          end
          

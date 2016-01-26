@@ -7,8 +7,6 @@ require_relative 'lib/deserialisable'
 require_relative 'lib/data'
 require_relative 'lib/soap'
 
-$stdout.sync = true
-
 $connections = []
 $notifications = []
 
@@ -56,8 +54,6 @@ end
 
 post '/event/soap' do
   body = /<soap:Body>(.*?)<\/soap:Body>/.match(raw).captures[0]
-    
-  puts body
     
   notify case body
          when /<MessageError/ then SoapMessageError.from_xml(body)
